@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <title>List </title>
+</head>
+<body>
+<h3>Computer</h3>
+<p>
+    <a th:href="@{/computer/create}">
+        Add new computer
+    </a>
+</p>
+<p>
+    <a th:href="@{/type}">
+        Type list
+    </a>
+</p>
+<table border="1px" id="tasks">
+    <thead>
+    <tr>
+        <th>Number</th>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Producer</th>
+        <th>Type</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="c,cStatus : ${computers}">
+        <td th:text="${cStatus.count}"></td>
+        <td th:text="${c.getCode()}"></td>
+        <td th:text="${c.getName()}"></td>
+        <td th:text="${c.getProducer()}"></td>
+        <td th:text="${c.getType().getName()}"></td>
+        <td><a th:href="@{/computer/update/{id}(id=${c.getId()})}">Update</a></td>
+        <td><a th:href="@{/computer/delete/{id}(id=${c.getId()})}">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:fragment="footer">
+    &copy; 2024 CODEGYM HUE
+</footer>
+</body>
+</html>
